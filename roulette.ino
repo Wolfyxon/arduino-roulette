@@ -86,12 +86,14 @@ void rollPlayer() {
 }
 
 void selectPlayer(uint8_t player) {
-  for(size_t i = 0; i < PLAYER_COUNT; i++) {
-    digitalWrite(getLed(i), alive[i]);
-  }
+  setAllLED(false);
+  delay(50);
+  digitalWrite(getLed(player), true);
 
   tone(SPEAKER, 800, 100);
   currentPlayer = player;
+
+  delay(200);
 }
 
 void selectNextPlayer() {
