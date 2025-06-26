@@ -197,7 +197,12 @@ void gameLoop() {
     return;
   }
 
-  if(pressedPlr != -1 && alive[pressedPlr]) {
+  if(pressedPlr != -1) {
+    if(!alive[pressedPlr]) {
+      tone(SPEAKER, 100, 200);
+      return;
+    }
+
     uint8_t led = getLed(pressedPlr);
 
     setAllLED(false);
