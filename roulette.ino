@@ -34,6 +34,14 @@ void setAllLED(bool state) {
   }
 }
 
+void setAliveLED(bool state) {
+  for(size_t i = 0; i < PLAYER_COUNT; i++) {
+    if(!alive[i]) continue;
+
+    digitalWrite(getLed(i), state);
+  }
+}
+
 void rollBarrel() {
   bulletPos = random(0, BARREL_SIZE - 1);
 
@@ -170,10 +178,12 @@ void menuLoop() {
 void gameLoop() {
   ulong_t now = millis();
 
-  if(now > lastFlash + 200) {
+  if(now > lastFlash + 500) {
     lastFlash = now;
     flashState = !flashState;
-    digitalWrite(getLed(currentPlayer), flashState);
+
+    setAliveLED(flashState);
+    digitalWrite(getLed(currentPlayer), true);
   }
 
   int pressedPlr = getPressedPlayer();
