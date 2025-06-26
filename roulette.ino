@@ -249,7 +249,9 @@ void gameLoop() {
     bulletPos = (bulletPos + 1) % BARREL_SIZE;
     
     if(getAliveCount() > 1) {
-      selectNextPlayer();
+      if(alive[pressedPlr] || !alive[currentPlayer]) {
+        selectNextPlayer();
+      }
     } else {
       uint8_t winner = 0;
 
